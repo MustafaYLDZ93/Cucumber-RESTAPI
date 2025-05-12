@@ -25,7 +25,7 @@ jobs:
       run: npm install
 
     - name: Run Cucumber Tests
-      run: npx cucumber-js
+      run: npx cucumber-js --format html:cucumber-report.html
 
     - name: Upload Cucumber Report
       if: always()
