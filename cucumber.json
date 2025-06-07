@@ -9,7 +9,7 @@
     "publishQuite": true,
     "dryRun": false,
     "require": [
-      "tests/steps/*.js"
+      "tests/step_definitions/*.js"
     ],
     "format": [
       "progress-bar",
