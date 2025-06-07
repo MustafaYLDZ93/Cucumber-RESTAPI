@@ -24,10 +24,6 @@ pipeline {
         
         
         
-        
-        
-        
-        
         stage('Checkout') {
             steps {
                 checkout scm
@@ -53,11 +49,6 @@ pipeline {
             }
         }
 
-        stage('Install Playwright Browsers') {
-            steps {
-                sh 'npx playwright install'
-            }
-        }
 
         stage('Run Tests'){
             steps{
@@ -82,17 +73,10 @@ pipeline {
 
         stage('Archive Reports') {
             steps {
-                archiveArtifacts artifacts: 'cucumber-report.html,cucumber-report.xml'
+                archiveArtifacts artifacts: 'cucumber-report.html'
             }
         }
 
-        stage('Publish JUnit Report') {
-            steps {
-                junit 'cucumber-report.xml'
-            }
-        }
-
-        // Publish HTML Report adımı kaldırıldı, sadece artifacts olarak sunulacak
     }
 
     post {
