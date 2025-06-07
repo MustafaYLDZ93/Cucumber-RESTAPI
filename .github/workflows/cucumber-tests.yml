@@ -1,12 +1,12 @@
 name: Run Cucumber Tests
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      test_tags:
+        description: 'Which tags to run? (e.g. @apiLogin or @login and not @regression)'
+        required: false
+        default: '@login'
 
 jobs:
   test:
