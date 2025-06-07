@@ -5,7 +5,7 @@ const assert = require('assert');
 let response;
 
 
-Given('I send a POST request to the user endpoint with the following payload:', async function (dataTable) {
+Given('I Send a POST request to the user endpoint with the following payload:', async function (dataTable) {
   const payload = dataTable.rowsHash();
   response = await axios.post('https://jsonplaceholder.typicode.com/users', payload, {
     headers: {
@@ -14,7 +14,7 @@ Given('I send a POST request to the user endpoint with the following payload:', 
   });
 });
 
-When('the response status code should be {int}', function (expectedStatusCode) {
+When('The response status code should be {int}', function (expectedStatusCode) {
   const status = response.status;
   if (status !== expectedStatusCode) {
     throw new Error(`Expected status code ${expectedStatusCode} but got ${status}`);
