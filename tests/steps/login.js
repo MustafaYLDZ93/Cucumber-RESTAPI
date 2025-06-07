@@ -14,7 +14,7 @@ Given('I send a POST request to the user endpoint with the following payload:', 
   });
 });
 
-When("the response status code should be 201", function () {
+When("the response status code should be 201 @apitest", function () {
     const status = response.status; // response değişkenini kullanıyoruz
     if (status !== 201) {
         throw new Error(`Expected status code 201 but got ${status}`);
