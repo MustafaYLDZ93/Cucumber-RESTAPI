@@ -7,9 +7,27 @@ pipeline {
 
     environment {
         PATH = "/opt/homebrew/bin:/usr/local/bin:$PATH"
+        // Branch'e göre ortam ayarları
+        TEST_ENV = "${env.BRANCH_NAME == 'main' ? 'production' : 'test'}"
     }
 
     stages {
+        stage('Branch Info') {
+            steps {
+                sh '''
+                echo "=== BRANCH INFO ==="
+                echo "Current Branch: ${BRANCH_NAME}"
+                echo "Test Environment: ${TEST_ENV}"
+                '''
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
         stage('Checkout') {
             steps {
                 checkout scm
@@ -41,15 +59,26 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                script {
+        stage('Run Tests'){
+            steps{
+                script{
                     def tagOption = params.CUCUMBER_TAG?.trim() ? "--tags ${params.CUCUMBER_TAG}" : ""
-                    // Klasik HTML ve JUnit XML raporları oluştur
-                    sh "npx cucumber-js ${tagOption} --format html:cucumber-report.html --format junit:cucumber-report.xml"
+
+                    // branch'e göre farklı test komutları
+                    if (env.BRANCH_NAME == 'main') {
+                        sh "npx cucumber-js ${tagOption} --format progress --format json:cucumber-report.json --format html:cucumber-report.html"
+                    } else if (env.BRANCH_NAME == 'test') {
+                        // develop branch için
+                        sh "npx cucumber-js ${tagOption} --format progress --format json:cucumber-report.json --format html:cucumber-report.html"
+                    } else {
+                        //diğer branch'ler için
+                        sh "npx cucumber-js ${tagOption} --format progress --format json:cucumber-report.json --format html:cucumber-report.html"
+                    }
                 }
             }
+
         }
+
 
         stage('Archive Reports') {
             steps {
