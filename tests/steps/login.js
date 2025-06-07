@@ -5,7 +5,7 @@ const assert = require('assert');
 let response;
 
 
-Given('I send a POST request to the user endpoint with the following payload:', async function (dataTable) {
+Given('I send a POST request to the user endpoint with the following payload @post:', async function (dataTable) {
   const payload = dataTable.rowsHash();
   response = await axios.post('https://jsonplaceholder.typicode.com/users', payload, {
     headers: {

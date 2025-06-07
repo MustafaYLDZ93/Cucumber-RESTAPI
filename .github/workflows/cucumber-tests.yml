@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       test_tags:
-        description: 'Which tags to run? (e.g. @apiLogin or @login and not @regression)'
+        description: 'Which tags to run? (e.g. @post or @get and not @regression)'
         required: false
-        default: '@login'
+        default: '@post'
 
 jobs:
   test:
